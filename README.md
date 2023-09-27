@@ -2,7 +2,7 @@
 
 ## Description
 
-This Python script manages book reviews by interacting with a Notion database. It reads book review data from a CSV file, calculates book metrics, and updates the Notion database with the latest information.
+This Python script manages book reviews by interacting with a Notion database. It reads book review data from a CSV file, calculates book metrics (the average rating and the number 5 star ratings) for each book, and updates the Notion database with this latest information. 
 
 ## How to Run the Program
 
@@ -20,15 +20,28 @@ This Python script manages book reviews by interacting with a Notion database. I
 3. **Execute the Script:**
    - Run the program by executing the Python script in your terminal:
      ```
-     python script_name.py
+     python main.py
      ```
 
-## Questions and Answers
+## Running Tests
+
+**Execute `test.py`:**
+   - Run the program by executing the Python script in your terminal:
+     ```
+     python test.py
+     ```
+**To add tests:**
+   - Go to test.py and add test functions to the `TestBookFunctions` class
+
+
+
+## Reflections
 
 - **Was there anything you got stuck on, and if so what did you do to resolve it?**
-  - During the development process, I faced a crucial decision point where I had to determine how to handle updates to existing book review entries in the Notion database. One option was to delete and recreate pages when updates were needed, while the other was to adopt an approach that never deletes pages but instead modifies them. After careful consideration, I chose the latter approach, which ensures that existing data remains intact and avoids unnecessary deletion or duplication of pages. This decision was made to provide a more robust and user-friendly solution for managing book reviews, even if it posed certain complexities in updating existing entries.
-- **Do you have any suggestions for improving the API documentation to make it clearer or easier to use?**
-  - The provided API documentation for the `main` function is already clear and informative. To make it even clearer, consider adding more specific examples or usage scenarios.
+  - During the development process, I faced a crucial decision point where I had to determine how to handle updates to existing book review entries in the Notion database. One option was to delete and recreate pages when updates were needed, while the other was to adopt an approach that never deletes pages but instead modifies them. After careful consideration, I chose the latter approach, which ensures that existing data remains intact and avoids unnecessary deletion or duplication of pages. This decision was made to provide a more robust and user-friendly solution for managing book reviews, even if it posed certain complexities in updating existing entries. Further, through limited preliminary expiriemnts, I found that the latter approach is more efficent than the former.
+  - 
+- **Suggestions for improving the API documentation to make it clearer or easier to use.**
+  - In my experience, the API documentation is very effective at covering the absolute basics. However, I did the feel that the Python SDK was very limited in the number of examples it offered. Having more coverage in the types of examples given and also providing a true UI (like the JS SDK) would make using the Python SDK much easier.
 
 ## Sources
 
