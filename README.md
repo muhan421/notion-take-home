@@ -33,15 +33,13 @@ This Python script manages book reviews by interacting with a Notion database. I
 **To add tests:**
    - Go to test.py and add test functions to the `TestBookFunctions` class
 
-
-
 ## Reflections
-
+- ** **
 - **Was there anything you got stuck on, and if so what did you do to resolve it?**
   - During the development process, I faced a crucial decision point where I had to determine how to handle updates to existing book review entries in the Notion database. One option was to delete and recreate pages when updates were needed, while the other was to adopt an approach that never deletes pages but instead modifies them. After careful consideration, I chose the latter approach, which ensures that existing data remains intact and avoids unnecessary deletion or duplication of pages. This decision was made to provide a more robust and user-friendly solution for managing book reviews, even if it posed certain complexities in updating existing entries. Further, through limited preliminary expiriemnts, I found that the latter approach is more efficent than the former.
-  - 
 - **Suggestions for improving the API documentation to make it clearer or easier to use.**
   - In my experience, the API documentation is very effective at covering the absolute basics. However, I did the feel that the Python SDK was very limited in the number of examples it offered. Having more coverage in the types of examples given and also providing a true UI (like the JS SDK) would make using the Python SDK much easier.
+  - 
 
 ## Sources
 
@@ -57,7 +55,7 @@ This Python script manages book reviews by interacting with a Notion database. I
 
 Here are some next steps to consider for enhancing this script:
 
-- **Add Unit Tests:** Develop unit tests to run the script on a variety of different CSV files and starting databases. Ensure that the output remains consistent based on the CSV file. This will help verify the script's reliability and robustness.
+- **Add Unit Tests:** Develop unit tests to run the script on a variety of different CSV files + starting databases and check that the corresponding is always the same for different starting databases to ensure idempotency (was unable to implement due to time contraints).
 - **CSV Format Checks:** Implement checks to ensure that the CSV file is properly formatted with the correct schema. This can include verifying the presence of required columns and data types.
 - **Duplicate Entry Handling:** Add logic to handle duplicate entries in the Notion database. Consider options such as merging duplicate entries or providing clear notifications for users when duplicates are detected.
 
