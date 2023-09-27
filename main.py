@@ -124,7 +124,7 @@ def modify_page(notion, page_id, page_data):
 
 # This function reads and processes data from a CSV file and returns a dictionary of book data.
 def collect_data_from_csv(file_name):
-    book_data = defaultdict(float)
+    book_data = defaultdict(lambda: defaultdict(float))
     
     with open(file_name, mode='r') as file:
         csv_reader = csv.reader(file)
