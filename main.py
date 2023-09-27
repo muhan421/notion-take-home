@@ -1,8 +1,10 @@
 import csv
+import time
 import os
 import sys
 from pprint import pprint
 from notion_client import Client
+from collections import defaultdict
 
 def get_notion_api_key():
     # Retrieve the Notion API token from the environment vars
@@ -79,7 +81,6 @@ def check_book_status_in_db(notion, book_title, page_data):
     ).get("results")
 
     # Check for duplicate entries in the database.
-    #TODO: Add logic to handle duplicate entires
     if len(results) > 1: 
         print("Error: Duplicate entires in database!!")
      
@@ -122,24 +123,20 @@ def modify_page(notion, page_id, page_data):
     results = notion.pages.update( **{ "page_id": page_id, "properties": new_page })
 
 # This function reads and processes data from a CSV file and returns a dictionary of book data.
-def collect_data_from_csv(file_name): 
-    book_data = {}
+def collect_data_from_csv(file_name):
+    book_data = defaultdict(float)
+    
     with open(file_name, mode='r') as file:
         csv_reader = csv.reader(file)
-
+        
         for row in csv_reader:
-            # Process data here
-            book_title, reviewer, rating = row
+            book_title, reviewer, rating = map(str.strip, row)
             book_title = clean_book_title(book_title)
             rating = float(rating)
             
-            # Handle the creation of the book title entry in book data.
-            if book_title not in book_data: book_data[book_title] = {}
-            book_entry = book_data[book_title]
+            book_data[book_title][reviewer] = rating
 
-            # Store reviewer ratings in the book entry.
-            book_entry[reviewer] = rating
-    return book_data
+    return dict(book_data)
 
 # Calculates book metrics such as average rating and the count of 5-star reviews for a given book.
 def calc_book_metrics(book_name, book_entry):
@@ -160,6 +157,8 @@ interactions to maintain a Notion database of book reviews, ensuring that the da
 is up-to-date with the latest book review data from the 'ratings.csv' file.
 '''
 def main(file_name):
+    start = time.time()
+
     # Retrieve the Notion API key and database ID.
     notion_key = get_notion_api_key()
     database_id = get_database_id()
@@ -168,7 +167,6 @@ def main(file_name):
     notion = Client(auth=notion_key)
 
     # Collect book data from the CSV file.
-    #TODO: Add checks to ensure that the the CSV is properly formatted with the correct schema
     book_data = collect_data_from_csv(file_name)
 
     for book_title in book_data.keys():
@@ -185,6 +183,9 @@ def main(file_name):
             # Add a new page entry to the database if it doesn't exist.
             add_page_to_db(notion, database_id, page_data)
         
+    end = time.time()
+    print("Time needed to complete operation: ", end - start)
+
 
 if __name__ == '__main__':
     main("ratings.csv")
