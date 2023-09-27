@@ -1,7 +1,5 @@
 # notion-take-home
 
-# Book Review Management Script
-
 ## Description
 
 This Python script manages book reviews by interacting with a Notion database. It reads book review data from a CSV file, calculates book metrics, and updates the Notion database with the latest information.
