@@ -1,5 +1,4 @@
-# notion-take-home
-
+# Nahum Maru - Intern Take Home Exercise
 ## Description
 
 This Python script manages book reviews by interacting with a Notion database. It reads book review data from a CSV file, calculates book metrics (the average rating and the number 5 star ratings) for each book, and updates the Notion database with this latest information. 
